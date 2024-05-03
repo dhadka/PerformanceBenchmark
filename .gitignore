@@ -1,4 +1,5 @@
 /.settings/
+/bin/
 native/**/*.jar
 src/**/*.class
 **/*.exe

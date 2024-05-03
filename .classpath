@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry kind="src" output="target/classes" path="src">
+	<classpathentry kind="src" output="bin" path="src">
 		<attributes>
 			<attribute name="optional" value="true"/>
 		</attributes>
@@ -26,5 +26,5 @@
 	<classpathentry kind="lib" path="lib/MOEAFramework-4.1.jar"/>
 	<classpathentry kind="lib" path="native/NativeFortran/NativeFortran.jar"/>
 	<classpathentry kind="lib" path="native/NativeCpp/NativeCpp.jar"/>
-	<classpathentry kind="output" path="target/classes"/>
+	<classpathentry kind="output" path="bin"/>
 </classpath>
