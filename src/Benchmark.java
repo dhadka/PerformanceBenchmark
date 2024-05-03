@@ -16,8 +16,8 @@ import org.moeaframework.util.Timing;
 
 public class Benchmark {
 	
-	public static final int N = 10;
-	public static final int NFE = 1_000_000;
+	public static int N = 10;
+	public static int NFE = 100000;
 	
 	public static void run(Problem problem) {
 		Timing.startTimer(problem.getName());
@@ -29,6 +29,14 @@ public class Benchmark {
 	}
 	
 	public static void main(String[] args) throws IOException {
+		if (args.length >= 1) {
+			N = Integer.parseInt(args[0]);
+		}
+		
+		if (args.length >= 2) {
+			NFE = Integer.parseInt(args[1]);
+		}
+		
 		for (int i = 0; i < N; i++) {
 			try (Problem problem = new DTLZ2WithJava()) {
 				run(problem);
