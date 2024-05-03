@@ -17,12 +17,13 @@ import org.moeaframework.util.Timing;
 public class Benchmark {
 	
 	public static final int N = 10;
+	public static final int NFE = 1_000_000;
 	
 	public static void run(Problem problem) {
 		Timing.startTimer(problem.getName());
 		
 		Algorithm algorithm = new NSGAII(problem);
-		algorithm.run(10000);
+		algorithm.run(NFE);
 		
 		Timing.stopTimer(problem.getName());
 	}
