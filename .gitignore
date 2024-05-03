@@ -1,0 +1,6 @@
+/.settings/
+native/**/*.jar
+src/**/*.class
+**/*.exe
+**/*.so
+**/*.dll
