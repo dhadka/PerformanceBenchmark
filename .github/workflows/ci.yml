@@ -19,6 +19,12 @@ jobs:
         with:
           java-version: ${{ matrix.java }}
           distribution: zulu
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12' 
+      - uses: actions/setup-python@v5
+        with:
+          python-version: 'pypy3.10' 
       - run: |
           make
           make run
