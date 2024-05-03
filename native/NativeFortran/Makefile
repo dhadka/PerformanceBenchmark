@@ -8,7 +8,7 @@ else
     SEPARATOR := :
 endif
 
-CLASSPATH := ..\..\lib\*$(SEPARATOR)..\..\bin$(SEPARATOR)NativeFortran.jar$(SEPARATOR).
+CLASSPATH := ../../lib/*$(SEPARATOR)NativeFortran.jar$(SEPARATOR).
 SYSARCH := $(shell java -classpath "$(CLASSPATH)" org.moeaframework.builder.JNAInfo --sysArch)
 LIBNAME := $(shell java -classpath "$(CLASSPATH)" org.moeaframework.builder.JNAInfo --libName --problem NativeFortran)
 

@@ -1,7 +1,7 @@
 # Edit the following to configure the compiler and required libraries
 CC = g++
 LIBS =
-CFLAGS = 
+CFLAGS = -O3
 
 # Configure the platform-specific settings
 ifeq ($(OS),Windows_NT)
@@ -10,7 +10,7 @@ else
     SEPARATOR := :
 endif
 
-CLASSPATH := ..\..\lib\*$(SEPARATOR)..\..\bin$(SEPARATOR)NativeCpp.jar$(SEPARATOR).
+CLASSPATH := ../../lib/*$(SEPARATOR)NativeCpp.jar$(SEPARATOR).
 SYSARCH := $(shell java -classpath "$(CLASSPATH)" org.moeaframework.builder.JNAInfo --sysArch)
 LIBNAME := $(shell java -classpath "$(CLASSPATH)" org.moeaframework.builder.JNAInfo --libName --problem NativeCpp)
 
