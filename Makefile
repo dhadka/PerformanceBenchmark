@@ -13,7 +13,7 @@ build:
 	javac -classpath "lib/*$(SEPARATOR)native/NativeC/*$(SEPARATOR)native/NativeCpp/*$(SEPARATOR)native/NativeFortran/*" src/org/moeaframework/performance/*.java
 	
 run:
-	java -classpath "lib/*$(SEPARATOR)native/NativeC/*$(SEPARATOR)src" src/Benchmark.java
+	java -classpath "lib/*$(SEPARATOR)native/NativeC/*$(SEPARATOR)native/NativeCpp/*$(SEPARATOR)native/NativeFortran/*$(SEPARATOR)src" src/Benchmark.java
 
 clean:
 	make -C c clean
