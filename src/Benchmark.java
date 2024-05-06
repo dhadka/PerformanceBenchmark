@@ -152,7 +152,7 @@ public class Benchmark {
 			runJMetalPlugin();
 		}
 
-		Timing.display();
+		Timing.asTabularData().toMarkdown(System.out);
 	}
 
 }
