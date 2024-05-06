@@ -17,6 +17,10 @@ public class NativeFortran extends AbstractProblem {
 	public NativeFortran() {
 		super(11, 2, 0);
 	}
+	
+	public String getName() {
+		return "Fortran (Native)";
+	}
 
 	public void evaluate(Solution solution) {
 		double[] vars = EncodingUtils.getReal(solution);

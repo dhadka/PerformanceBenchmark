@@ -18,8 +18,7 @@ build:
 	make -C native/NativeFortran
 	
 	mkdir -p bin
-	javac -d bin -classpath "$(CLASSPATH)" src/*.java
-	javac -d bin -classpath "$(CLASSPATH)" src/org/moeaframework/performance/*.java
+	javac -d bin -classpath "$(CLASSPATH)" src/*.java src/org/moeaframework/performance/*.java
 	
 run:
 	java -classpath "$(CLASSPATH)" Benchmark $(SAMPLES) $(NFE)

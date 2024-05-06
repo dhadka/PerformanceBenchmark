@@ -17,6 +17,10 @@ public class NativeC extends AbstractProblem {
 	public NativeC() {
 		super(11, 2, 0);
 	}
+	
+	public String getName() {
+		return "C (Native)";
+	}
 
 	public void evaluate(Solution solution) {
 		double[] vars = EncodingUtils.getReal(solution);

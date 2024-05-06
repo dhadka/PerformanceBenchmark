@@ -17,6 +17,10 @@ public class NativeCpp extends AbstractProblem {
 	public NativeCpp() {
 		super(11, 2, 0);
 	}
+	
+	public String getName() {
+		return "C++ (Native)";
+	}
 
 	public void evaluate(Solution solution) {
 		double[] vars = EncodingUtils.getReal(solution);

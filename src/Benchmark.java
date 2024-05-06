@@ -111,6 +111,18 @@ public class Benchmark {
 
 		for (int i = 0; i < N; i++) {
 			runDirect();
+			
+			try (Problem problem = new NativeC()) {
+				run(problem);
+			}
+
+			try (Problem problem = new NativeCpp()) {
+				run(problem);
+			}
+
+			try (Problem problem = new NativeFortran()) {
+				run(problem);
+			}
 
 			try (Problem problem = new DTLZ2WithCStdio()) {
 				run(problem);
@@ -133,18 +145,6 @@ public class Benchmark {
 			}
 
 			try (Problem problem = new DTLZ2WithPypySocket()) {
-				run(problem);
-			}
-
-			try (Problem problem = new NativeC()) {
-				run(problem);
-			}
-
-			try (Problem problem = new NativeCpp()) {
-				run(problem);
-			}
-
-			try (Problem problem = new NativeFortran()) {
 				run(problem);
 			}
 
