@@ -29,125 +29,129 @@ import org.moeaframework.performance.DTLZ2WithPythonSocket;
 import org.moeaframework.performance.DTLZ2WithPythonStdio;
 import org.moeaframework.problem.DTLZ.DTLZ2;
 import org.moeaframework.util.Timing;
-
+import org.moeaframework.util.TypedProperties;
 import org.uma.jmetal.algorithm.multiobjective.nsgaii.NSGAIIBuilder.NSGAIIVariant;
 import org.uma.jmetal.solution.doublesolution.DoubleSolution;
 
 public class Benchmark {
-	
+
 	public static int N = 10;
 	public static int NFE = 100000;
-	
+
 	public static void run(Problem problem) {
 		Timing.startTimer(problem.getName());
-		
+
 		Algorithm algorithm = new NSGAII(problem);
 		algorithm.run(NFE);
-		
+
 		Timing.stopTimer(problem.getName());
 	}
-	
+
 	public static void runDirect() {
 		DTLZ2 problem = new DTLZ2(2);
-		
+
 		Timing.startTimer("Java");
-		
+
 		Algorithm algorithm = new NSGAII(problem);
 		algorithm.run(NFE);
-		
+
 		Timing.stopTimer("Java");
 	}
-	
+
 	// Construct and run JMetal directly
 	public static void runJMetalDirect() {
 		org.uma.jmetal.problem.multiobjective.dtlz.DTLZ2 problem =
 				new org.uma.jmetal.problem.multiobjective.dtlz.DTLZ2(11, 2);
-		
+
 		Timing.startTimer("JMetal (Direct)");
-		
+
 		org.uma.jmetal.operator.crossover.impl.SBXCrossover crossover = 
 				new org.uma.jmetal.operator.crossover.impl.SBXCrossover(1.0, 15.0);
-		
+
 		org.uma.jmetal.operator.mutation.impl.PolynomialMutation mutation =
 				new org.uma.jmetal.operator.mutation.impl.PolynomialMutation(1.0 / problem.numberOfVariables(), 20.0);
-		
+
 		org.uma.jmetal.algorithm.multiobjective.nsgaii.NSGAIIBuilder<DoubleSolution> builder =
 				new org.uma.jmetal.algorithm.multiobjective.nsgaii.NSGAIIBuilder<DoubleSolution>(
 						problem, crossover, mutation, 100);
-		
+
 		builder.setVariant(NSGAIIVariant.NSGAII);
 		builder.setMaxEvaluations(NFE);
-		
-        org.uma.jmetal.algorithm.multiobjective.nsgaii.NSGAII<DoubleSolution> algorithm = builder.build();
-        algorithm.run();
-		
+
+		org.uma.jmetal.algorithm.multiobjective.nsgaii.NSGAII<DoubleSolution> algorithm = builder.build();
+		algorithm.run();
+
 		Timing.stopTimer("JMetal (Direct)");
 	}
-	
+
 	// Construct and run JMetal using jmetal-plugin
 	public static void runJMetalPlugin() {
 		DTLZ2 problem = new DTLZ2(2);
-		
+
 		Timing.startTimer("JMetal (Plugin)");
-		
-		Algorithm algorithm = AlgorithmFactory.getInstance().getAlgorithm("NSGAII-JMetal", problem);
+
+		// this must be set to ensure JMetal runs for the correct number of evaluations!
+		TypedProperties properties = new TypedProperties();
+		properties.setInt("maxEvaluations", NFE);
+
+		Algorithm algorithm = AlgorithmFactory.getInstance().getAlgorithm("NSGAII-JMetal", properties, problem);
 		algorithm.run(NFE);
-		
+
 		Timing.stopTimer("JMetal (Plugin)");
 	}
-	
+
 	public static void main(String[] args) throws IOException {
 		if (args.length >= 1) {
 			N = Integer.parseInt(args[0]);
 		}
-		
+
 		if (args.length >= 2) {
 			NFE = Integer.parseInt(args[1]);
 		}
-		
+
 		for (int i = 0; i < N; i++) {
 			runDirect();
-			
+
 			try (Problem problem = new DTLZ2WithCStdio()) {
 				run(problem);
 			}
-			
+
 			try (Problem problem = new DTLZ2WithCSocket()) {
 				run(problem);
 			}
-			
+
 			try (Problem problem = new DTLZ2WithPythonStdio()) {
 				run(problem);
 			}
-			
+
 			try (Problem problem = new DTLZ2WithPythonSocket()) {
 				run(problem);
 			}
-			
+
 			try (Problem problem = new DTLZ2WithPypyStdio()) {
 				run(problem);
 			}
-			
+
 			try (Problem problem = new DTLZ2WithPypySocket()) {
 				run(problem);
 			}
-			
+
 			try (Problem problem = new NativeC()) {
 				run(problem);
 			}
-			
+
 			try (Problem problem = new NativeCpp()) {
 				run(problem);
 			}
-			
+
 			try (Problem problem = new NativeFortran()) {
 				run(problem);
 			}
-			
+
 			runJMetalDirect();
 			runJMetalPlugin();
 		}
-		
+
 		Timing.display();
 	}
 
