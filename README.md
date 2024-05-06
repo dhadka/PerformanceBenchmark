@@ -1,5 +1,7 @@
 # Performance Benchmarking
 
+This repository benchmarks the performance of the MOEA Framework.  This helps monitor for any changes
+that affect performance.  The default settings are `100,000` function evaluations with `10` repetitions.
 
 ## License
 
