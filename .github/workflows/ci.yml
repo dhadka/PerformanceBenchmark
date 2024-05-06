@@ -7,11 +7,11 @@ on:
       samples:
         type: number
         required: true
-        default: 10
+        default: '10'
       nfe:
         type: number
         required: true
-        default: 100000
+        default: '100000'
       java-distribution:
         type: choice
         required: true
@@ -40,8 +40,8 @@ on:
         default: ''
         
 env:
-  SAMPLES: ${{ inputs.samples || 10 }}
-  NFE: ${{ inputs.nfe || 100000 }}
+  SAMPLES: ${{ inputs.samples || '10' }}
+  NFE: ${{ inputs.nfe || '100000' }}
   JAVA_DISTRIBUTION: ${{ inputs.java-distribution || 'zulu' }}
   JAVA_VERSION: ${{ inputs.java-version || '17' }}
   BRANCH: ${{ inputs.branch || '' }}
@@ -59,7 +59,7 @@ jobs:
         uses: actions/setup-java@v4
         with:
           java-version: ${{ env.JAVA_VERSION }}
-          distribution: ${{ env.JAVA_DISTRIBUTION}
+          distribution: ${{ env.JAVA_DISTRIBUTION }}
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12' 
