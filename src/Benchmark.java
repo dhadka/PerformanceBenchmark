@@ -30,6 +30,7 @@ import org.moeaframework.performance.DTLZ2WithPythonStdio;
 import org.moeaframework.problem.DTLZ.DTLZ2;
 import org.moeaframework.util.Timing;
 import org.moeaframework.util.TypedProperties;
+import org.moeaframework.util.format.TableFormat;
 import org.uma.jmetal.algorithm.multiobjective.nsgaii.NSGAIIBuilder.NSGAIIVariant;
 import org.uma.jmetal.solution.doublesolution.DoubleSolution;
 
@@ -152,7 +153,7 @@ public class Benchmark {
 			runJMetalPlugin();
 		}
 
-		Timing.asTabularData().toMarkdown(System.out);
+		Timing.asTabularData().display(TableFormat.Markdown);
 	}
 
 }
