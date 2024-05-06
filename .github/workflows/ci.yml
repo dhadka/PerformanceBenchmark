@@ -35,7 +35,6 @@ on:
         default: '17'
       branch:
         type: string
-        required: true
         description: MOEA Framework branch name or ref
         default: ''
         
