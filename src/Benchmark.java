@@ -47,8 +47,17 @@ public class Benchmark {
 
 		Timing.stopTimer(problem.getName());
 	}
+	
+	public static void runPureC() throws IOException, InterruptedException {
+		Timing.startTimer("C (pure)");
+		
+		Process process = new ProcessBuilder("./c/dtlz2_pure.exe", Integer.toString(NFE)).start();
+		process.waitFor();
+		
+		Timing.stopTimer("C (pure)");
+	}
 
-	public static void runDirect() {
+	public static void runJava() {
 		DTLZ2 problem = new DTLZ2(2);
 
 		Timing.startTimer("Java");
@@ -101,7 +110,7 @@ public class Benchmark {
 		Timing.stopTimer("JMetal (Plugin)");
 	}
 
-	public static void main(String[] args) throws IOException {
+	public static void main(String[] args) throws IOException, InterruptedException {
 		if (args.length >= 1) {
 			N = Integer.parseInt(args[0]);
 		}
@@ -111,7 +120,8 @@ public class Benchmark {
 		}
 
 		for (int i = 0; i < N; i++) {
-			runDirect();
+			runPureC();
+			runJava();
 			
 			try (Problem problem = new NativeC()) {
 				run(problem);

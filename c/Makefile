@@ -12,14 +12,16 @@ ifeq ($(OS),Windows_NT)
     LIBS += -lwsock32 -lWs2_32
 endif
 
-main: dtlz2_stdio.exe dtlz2_socket.exe
+main: dtlz2_stdio.exe dtlz2_socket.exe dtlz2_pure.exe
 
 clean:
-	rm -f dtlz2_stdio.exe dtlz2_socket.exe
+	rm -f dtlz2_stdio.exe dtlz2_socket.exe dtlz2_pure.exe
 
-dtlz2_stdio.exe:
+dtlz2_stdio.exe: dtlz2.c moeaframework.c
 	gcc -O3 -o dtlz2_stdio.exe dtlz2.c moeaframework.c $(LIBS)
 
-dtlz2_socket.exe:
+dtlz2_socket.exe: dtlz2.c moeaframework.c
 	gcc -O3 -DUSE_SOCKET -o dtlz2_socket.exe dtlz2.c moeaframework.c $(LIBS)
 
+dtlz2_pure.exe: dtlz2_pure.c moeaframework.c
+	gcc -O3 -o dtlz2_pure.exe dtlz2_pure.c moeaframework.c $(LIBS)
