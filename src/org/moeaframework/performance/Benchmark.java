@@ -30,7 +30,9 @@ import org.moeaframework.util.format.TableFormat;
 import org.uma.jmetal.algorithm.multiobjective.nsgaii.NSGAIIBuilder.NSGAIIVariant;
 import org.uma.jmetal.solution.doublesolution.DoubleSolution;
 
-import NativeC.NativeC;
+import org.moeaframework.benchmark.NativeC;
+import org.moeaframework.benchmark.NativeCPP;
+import org.moeaframework.benchmark.NativeFortran;
 
 public class Benchmark {
 
@@ -125,7 +127,7 @@ public class Benchmark {
 				run(problem);
 			}
 
-			try (Problem problem = new NativeCpp()) {
+			try (Problem problem = new NativeCPP()) {
 				run(problem);
 			}
 

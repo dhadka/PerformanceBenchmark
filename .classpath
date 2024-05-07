@@ -25,7 +25,7 @@
 	<classpathentry kind="lib" path="native/NativeC/NativeC.jar"/>
 	<classpathentry kind="lib" path="lib/MOEAFramework-4.1.jar"/>
 	<classpathentry kind="lib" path="native/NativeFortran/NativeFortran.jar"/>
-	<classpathentry kind="lib" path="native/NativeCpp/NativeCpp.jar"/>
 	<classpathentry kind="lib" path="lib/jmetal-plugin-6.2.0-jar-with-dependencies.jar"/>
+	<classpathentry kind="lib" path="native/NativeCPP/NativeCPP.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
