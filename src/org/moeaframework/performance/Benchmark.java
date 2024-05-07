@@ -15,24 +15,22 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with the MOEA Framework.  If not, see <http://www.gnu.org/licenses/>.
  */
+package org.moeaframework.performance;
+
 import java.io.IOException;
 
 import org.moeaframework.algorithm.NSGAII;
 import org.moeaframework.core.Algorithm;
 import org.moeaframework.core.Problem;
 import org.moeaframework.core.spi.AlgorithmFactory;
-import org.moeaframework.performance.DTLZ2WithCSocket;
-import org.moeaframework.performance.DTLZ2WithCStdio;
-import org.moeaframework.performance.DTLZ2WithPypySocket;
-import org.moeaframework.performance.DTLZ2WithPypyStdio;
-import org.moeaframework.performance.DTLZ2WithPythonSocket;
-import org.moeaframework.performance.DTLZ2WithPythonStdio;
 import org.moeaframework.problem.DTLZ.DTLZ2;
 import org.moeaframework.util.Timing;
 import org.moeaframework.util.TypedProperties;
 import org.moeaframework.util.format.TableFormat;
 import org.uma.jmetal.algorithm.multiobjective.nsgaii.NSGAIIBuilder.NSGAIIVariant;
 import org.uma.jmetal.solution.doublesolution.DoubleSolution;
+
+import NativeC.NativeC;
 
 public class Benchmark {
 

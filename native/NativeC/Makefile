@@ -1,6 +1,6 @@
 # Edit the following to configure the compiler and required libraries
 CC = gcc
-LIBS =
+LIBS = -lm
 CFLAGS = -O3
 
 # Configure the platform-specific settings
@@ -10,24 +10,25 @@ else
     SEPARATOR := :
 endif
 
-CLASSPATH := ../../lib/*$(SEPARATOR)NativeC.jar$(SEPARATOR).
+CLASSPATH := ..\..\lib\*$(SEPARATOR)..\..\bin$(SEPARATOR)NativeC.jar$(SEPARATOR).
 SYSARCH := $(shell java -classpath "$(CLASSPATH)" org.moeaframework.builder.JNAInfo --sysArch)
 LIBNAME := $(shell java -classpath "$(CLASSPATH)" org.moeaframework.builder.JNAInfo --libName --problem NativeC)
 
 # Compile the shared library
 build:
-	mkdir -p $(SYSARCH)
-	$(CC) $(CFLAGS) -c -fPIC NativeC.c $(LIBS)
-	$(CC) -shared -o $(SYSARCH)/$(LIBNAME) NativeC.o
-	javac -classpath "$(CLASSPATH)" NativeC.java NativeCProvider.java
+	mkdir -p bin/
+	mkdir -p bin/$(SYSARCH)
+	$(CC) $(CFLAGS) -c -fPIC -o bin/NativeC.o NativeC.c $(LIBS)
+	$(CC) -shared -o bin/$(SYSARCH)/$(LIBNAME) bin/NativeC.o
+	cp -r META-INF bin
+	javac -classpath "$(CLASSPATH)" -d bin src/org/moeaframework/benchmark/*.java
 	
-	jar cf NativeC.jar *.class $(SYSARCH) META-INF
+	jar -cf NativeC.jar -C bin META-INF/ -C bin org/moeaframework/benchmark -C bin $(SYSARCH)/
 	
-	rm -f *.o *.class
 	java -classpath "$(CLASSPATH)" org.moeaframework.builder.JNAInfo --test --problem NativeC
 
 clean:
-	rm -rf $(SYSARCH) NativeC.jar
+	rm -rf bin/ NativeC.jar
 	
 run:
-	java -classpath "$(CLASSPATH)" Example.java
+	java -classpath "$(CLASSPATH)" org.moeaframework.benchmark.Example

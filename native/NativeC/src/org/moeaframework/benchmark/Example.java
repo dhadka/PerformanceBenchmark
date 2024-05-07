@@ -1,3 +1,5 @@
+package org.moeaframework.benchmark;
+
 import org.moeaframework.algorithm.NSGAII;
 import org.moeaframework.core.Problem;
 

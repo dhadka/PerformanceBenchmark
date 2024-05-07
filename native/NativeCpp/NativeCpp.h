@@ -1,5 +1,5 @@
-#ifndef NativeCpp_H
-#define NativeCpp_H
+#ifndef NativeCPP_H
+#define NativeCPP_H
 
 extern "C" {
 #ifdef __WIN32__

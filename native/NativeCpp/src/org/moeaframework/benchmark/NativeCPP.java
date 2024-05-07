@@ -1,3 +1,5 @@
+package org.moeaframework.benchmark;
+
 import org.moeaframework.core.Solution;
 import org.moeaframework.core.variable.EncodingUtils;
 import org.moeaframework.core.variable.RealVariable;
@@ -6,20 +8,16 @@ import org.moeaframework.problem.AbstractProblem;
 import com.sun.jna.Library;
 import com.sun.jna.Native;
 
-public class NativeFortran extends AbstractProblem {
+public class NativeCPP extends AbstractProblem {
 
-	public interface NativeFortranImpl extends Library {
+	public interface NativeCPPImpl extends Library {
 		void evaluate(double[] vars, double[] objs, double[] constrs);
 	}
 	
-	private final NativeFortranImpl INSTANCE = (NativeFortranImpl)Native.load("NativeFortran", NativeFortranImpl.class);
+	private final NativeCPPImpl INSTANCE = (NativeCPPImpl)Native.load("NativeCPP", NativeCPPImpl.class);
 
-	public NativeFortran() {
+	public NativeCPP() {
 		super(11, 2, 0);
-	}
-	
-	public String getName() {
-		return "Fortran (Native)";
 	}
 
 	public void evaluate(Solution solution) {

@@ -1,7 +1,8 @@
 /.settings/
-/bin/
 native/**/*.jar
 src/**/*.class
 **/*.exe
 **/*.so
 **/*.dll
+**/*.mod
+**/bin/

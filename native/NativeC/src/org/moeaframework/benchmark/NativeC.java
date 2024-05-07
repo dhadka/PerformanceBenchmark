@@ -1,3 +1,5 @@
+package org.moeaframework.benchmark;
+
 import org.moeaframework.core.Solution;
 import org.moeaframework.core.variable.EncodingUtils;
 import org.moeaframework.core.variable.RealVariable;
@@ -16,10 +18,6 @@ public class NativeC extends AbstractProblem {
 
 	public NativeC() {
 		super(11, 2, 0);
-	}
-	
-	public String getName() {
-		return "C (Native)";
 	}
 
 	public void evaluate(Solution solution) {

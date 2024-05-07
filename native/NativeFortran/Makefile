@@ -1,5 +1,7 @@
 # Edit the following to configure the compiler and required libraries
 FORTRAN = gfortran
+LIBS =
+FFLAGS = -O3
 
 # Configure the platform-specific settings
 ifeq ($(OS),Windows_NT)
@@ -8,23 +10,25 @@ else
     SEPARATOR := :
 endif
 
-CLASSPATH := ../../lib/*$(SEPARATOR)NativeFortran.jar$(SEPARATOR).
+CLASSPATH := ..\..\lib\*$(SEPARATOR)..\..\bin$(SEPARATOR)NativeFortran.jar$(SEPARATOR).
 SYSARCH := $(shell java -classpath "$(CLASSPATH)" org.moeaframework.builder.JNAInfo --sysArch)
 LIBNAME := $(shell java -classpath "$(CLASSPATH)" org.moeaframework.builder.JNAInfo --libName --problem NativeFortran)
 
 # Compile the shared library
 build:
-	mkdir -p $(SYSARCH)
-	$(FORTRAN) -shared -fPIC -o $(SYSARCH)/$(LIBNAME) NativeFortran.f90
-	javac -classpath "$(CLASSPATH)" NativeFortran.java NativeFortranProvider.java
+	mkdir -p bin/
+	mkdir -p bin/$(SYSARCH)
+	$(FORTRAN) $(FFLAGS) -c -fPIC -o bin/NativeFortran.o NativeFortran.f90 $(LIBS)
+	$(FORTRAN) -shared -o bin/$(SYSARCH)/$(LIBNAME) bin/NativeFortran.o
+	cp -r META-INF bin
+	javac -classpath "$(CLASSPATH)" -d bin src/org/moeaframework/benchmark/*.java
 	
-	jar cf NativeFortran.jar *.class $(SYSARCH) META-INF
+	jar -cf NativeFortran.jar -C bin META-INF/ -C bin org/moeaframework/benchmark -C bin $(SYSARCH)/
 	
-	rm -f *.class
 	java -classpath "$(CLASSPATH)" org.moeaframework.builder.JNAInfo --test --problem NativeFortran
 
 clean:
-	rm -rf $(SYSARCH) NativeFortran.jar
+	rm -rf bin/ NativeFortran.jar
 	
 run:
-	java -classpath "$(CLASSPATH)" Example.java
+	java -classpath "$(CLASSPATH)" org.moeaframework.benchmark.Example

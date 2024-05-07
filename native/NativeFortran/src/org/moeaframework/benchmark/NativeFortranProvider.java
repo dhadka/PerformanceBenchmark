@@ -1,3 +1,5 @@
+package org.moeaframework.benchmark;
+
 import org.moeaframework.core.FrameworkException;
 import org.moeaframework.core.spi.RegisteredProblemProvider;
 
