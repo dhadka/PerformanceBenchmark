@@ -36,7 +36,7 @@ import org.moeaframework.benchmark.NativeFortran;
 
 public class Benchmark {
 
-	public static int N = 10;
+	public static int N = 1;
 	public static int NFE = 100000;
 
 	public static void run(Problem problem) {
