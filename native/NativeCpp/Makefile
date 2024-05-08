@@ -10,7 +10,7 @@ else
     SEPARATOR := :
 endif
 
-CLASSPATH := ..\..\lib\*$(SEPARATOR)..\..\bin$(SEPARATOR)NativeCPP.jar$(SEPARATOR).
+CLASSPATH := ../../lib/*$(SEPARATOR)NativeCPP.jar$(SEPARATOR).
 SYSARCH := $(shell java -classpath "$(CLASSPATH)" org.moeaframework.builder.JNAInfo --sysArch)
 LIBNAME := $(shell java -classpath "$(CLASSPATH)" org.moeaframework.builder.JNAInfo --libName --problem NativeCPP)
 
@@ -22,9 +22,7 @@ build:
 	$(CC) -shared -o bin/$(SYSARCH)/$(LIBNAME) bin/NativeCPP.o
 	cp -r META-INF bin
 	javac -classpath "$(CLASSPATH)" -d bin src/org/moeaframework/benchmark/*.java
-	
 	jar -cf NativeCPP.jar -C bin META-INF/ -C bin org/moeaframework/benchmark -C bin $(SYSARCH)/
-	
 	java -classpath "$(CLASSPATH)" org.moeaframework.builder.JNAInfo --test --problem NativeCPP
 
 clean:

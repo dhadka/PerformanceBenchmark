@@ -10,7 +10,7 @@ else
     SEPARATOR := :
 endif
 
-CLASSPATH := ..\..\lib\*$(SEPARATOR)..\..\bin$(SEPARATOR)NativeFortran.jar$(SEPARATOR).
+CLASSPATH := ../../lib/*$(SEPARATOR)NativeFortran.jar$(SEPARATOR).
 SYSARCH := $(shell java -classpath "$(CLASSPATH)" org.moeaframework.builder.JNAInfo --sysArch)
 LIBNAME := $(shell java -classpath "$(CLASSPATH)" org.moeaframework.builder.JNAInfo --libName --problem NativeFortran)
 
@@ -22,9 +22,7 @@ build:
 	$(FORTRAN) -shared -o bin/$(SYSARCH)/$(LIBNAME) bin/NativeFortran.o
 	cp -r META-INF bin
 	javac -classpath "$(CLASSPATH)" -d bin src/org/moeaframework/benchmark/*.java
-	
 	jar -cf NativeFortran.jar -C bin META-INF/ -C bin org/moeaframework/benchmark -C bin $(SYSARCH)/
-	
 	java -classpath "$(CLASSPATH)" org.moeaframework.builder.JNAInfo --test --problem NativeFortran
 
 clean:
