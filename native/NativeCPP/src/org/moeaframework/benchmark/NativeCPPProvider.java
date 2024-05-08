@@ -8,16 +8,9 @@ public class NativeCPPProvider extends RegisteredProblemProvider {
 	public NativeCPPProvider() {
 		super();
 		
-		register("NativeCPP", this::createNativeCPP, null);
+		register("NativeCPP", NativeCPP::new, null);
+		register("NativeCPPDirectMapping", NativeCPPDirectMapping::new, null);
 		registerDiagnosticToolProblems(getRegisteredProblems());
-	}
-	
-	private NativeCPP createNativeCPP() {
-		try {
-			return new NativeCPP();
-		} catch (Exception e) {
-			throw new FrameworkException("Failed to create instance of NativeCPP", e);
-		}
 	}
 	
 }

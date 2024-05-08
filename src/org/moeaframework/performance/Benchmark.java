@@ -23,6 +23,7 @@ import org.moeaframework.algorithm.NSGAII;
 import org.moeaframework.core.Algorithm;
 import org.moeaframework.core.Problem;
 import org.moeaframework.core.spi.AlgorithmFactory;
+import org.moeaframework.problem.ProblemException;
 import org.moeaframework.problem.DTLZ.DTLZ2;
 import org.moeaframework.util.Timing;
 import org.moeaframework.util.TypedProperties;
@@ -31,8 +32,11 @@ import org.uma.jmetal.algorithm.multiobjective.nsgaii.NSGAIIBuilder.NSGAIIVarian
 import org.uma.jmetal.solution.doublesolution.DoubleSolution;
 
 import org.moeaframework.benchmark.NativeC;
+import org.moeaframework.benchmark.NativeCDirectMapping;
 import org.moeaframework.benchmark.NativeCPP;
+import org.moeaframework.benchmark.NativeCPPDirectMapping;
 import org.moeaframework.benchmark.NativeFortran;
+import org.moeaframework.benchmark.NativeFortranDirectMapping;
 
 public class Benchmark {
 
@@ -134,6 +138,18 @@ public class Benchmark {
 			try (Problem problem = new NativeFortran()) {
 				run(problem);
 			}
+			
+			try (Problem problem = new NativeCDirectMapping()) {
+				run(problem);
+			}
+			
+			try (Problem problem = new NativeCPPDirectMapping()) {
+				run(problem);
+			}
+			
+			try (Problem problem = new NativeFortranDirectMapping()) {
+				run(problem);
+			}
 
 			try (Problem problem = new DTLZ2WithCStdio()) {
 				run(problem);
@@ -153,10 +169,14 @@ public class Benchmark {
 
 			try (Problem problem = new DTLZ2WithPypyStdio()) {
 				run(problem);
+			} catch (ProblemException e) {
+				// Pypy not available, skip
 			}
-
+	
 			try (Problem problem = new DTLZ2WithPypySocket()) {
 				run(problem);
+			} catch (ProblemException e) {
+				// Pypy not available, skip
 			}
 
 			runJMetalDirect();

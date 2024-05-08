@@ -8,16 +8,9 @@ public class NativeCProvider extends RegisteredProblemProvider {
 	public NativeCProvider() {
 		super();
 		
-		register("NativeC", this::createNativeC, null);
+		register("NativeC", NativeC::new, null);
+		register("NativeCDirectMapping", NativeCDirectMapping::new, null);
 		registerDiagnosticToolProblems(getRegisteredProblems());
-	}
-	
-	private NativeC createNativeC() {
-		try {
-			return new NativeC();
-		} catch (Exception e) {
-			throw new FrameworkException("Failed to create instance of NativeC", e);
-		}
 	}
 	
 }
