@@ -66,7 +66,7 @@ jobs:
         with:
           python-version: 'pypy3.10' 
       - uses: fortran-lang/setup-fortran@v1
-        if: runner.os == 'macOS'
+        if: false && runner.os == 'macOS'
         with:
           compiler: gcc
           version: 13
