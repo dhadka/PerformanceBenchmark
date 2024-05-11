@@ -1,7 +1,30 @@
 # Performance Benchmarking
 
-This repository benchmarks the performance of the MOEA Framework.  This helps monitor for any changes
-that affect performance.  The default settings are `100,000` function evaluations with `10` repetitions.
+This repository benchmarks the performance of the MOEA Framework.  This helps monitor for any changes that affect performance.
+
+## Benchmarks
+
+All benchmarks are based on the 2-D DTLZ2 problem with `100,000` function evaluations (NFE) and `10` seeds.  Below details each of the benchmarks.
+See [Timings](Timings.md) for collected timing data.
+
+Benchmark                  | Description
+-------------------------- | -----------
+C (pure)                   | Pure C implementation, measuring evaluation time without overhead
+Java                       | Pure Java implementation, measuring evaluation time without overhead
+NativeC                    | JNA native library written in C
+NativeCPP                  | JNA native library written in C++
+NativeFortran              | JNA native library written in Fortran
+NativeCDirectMapping       | JNA direct mapping written in C (less overhead)
+NativeCPPDirectMapping     | JNA direct mapping written in C++ (less overhead)
+NativeFortranDirectMapping | JNA direct mapping written in Fortran (less overhead)
+C (stdio)                  | `ExternalProblem` written in C using Standard I/O
+C (socket)                 | `ExternalProblem` written in C using Sockets
+Python (stdio)             | `ExternalProblem` written in Python using Standard I/O
+Python (socket)            | `ExternalProblem` written in Python using Sockets
+Pypy (stdio)               | Same as "Python (stdio)" but using the `pypy` JIT compiler
+Pypy (socket)              | Same as "Python (socket)" but using the `pypy` JIT compiler
+JMetal (Direct)            | JMetal's implementation, calling JMetal's NSGA-II and DTLZ2 code directly
+JMetal (Plugin)            | JMetal's implementation, using `JMetal-Plugin` to create instances
 
 ## License
 
