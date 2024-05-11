@@ -1,5 +1,52 @@
 # Timings
 
+## Validations Branch
+
+This branch replaces in-line argument validations with the new `Validate` class.  Consequently, the new way does involve creating `Validator` instances
+and additional method calls, which could increase overhead, especially on heavily-used code paths.
+
+### Windows, Zulu 17
+
+Timer                      | Min      | Mean     | Max      | Count
+-------------------------- | -------- | -------- | -------- | -----
+C (pure)                   | 0.046435 | 0.048382 | 0.053773 | 10   
+Java                       | 0.568379 | 0.624811 | 1.103605 | 10   
+NativeC                    | 0.806199 | 0.819893 | 0.864888 | 10   
+NativeCPP                  | 0.809345 | 0.814275 | 0.832792 | 10   
+NativeFortran              | 0.589574 | 0.648881 | 0.744082 | 10   
+NativeCDirectMapping       | 0.613737 | 0.617632 | 0.621218 | 10   
+NativeCPPDirectMapping     | 0.614633 | 0.619571 | 0.625393 | 10   
+NativeFortranDirectMapping | 0.410462 | 0.452099 | 0.488915 | 10   
+C (stdio)                  | 4.997192 | 5.059547 | 5.382963 | 10   
+C (socket)                 | 6.228203 | 6.264409 | 6.409912 | 10   
+Python (stdio)             | 6.273708 | 6.622920 | 9.370421 | 10   
+Python (socket)            | 8.174928 | 8.243698 | 8.301313 | 10   
+Pypy (stdio)               | 6.278997 | 6.317997 | 6.535079 | 10   
+Pypy (socket)              | 8.200104 | 8.252704 | 8.298511 | 10   
+JMetal (Direct)            | 1.484778 | 1.627321 | 2.616492 | 10   
+JMetal (Plugin)            | 1.491873 | 1.530422 | 1.713050 | 10   
+
+### Ubuntu, Zulu 17
+
+Timer                      | Min      | Mean     | Max      | Count
+-------------------------- | -------- | -------- | -------- | -----
+C (pure)                   | 0.012931 | 0.014844 | 0.023636 | 10   
+Java                       | 0.559479 | 0.602240 | 0.970066 | 10   
+NativeC                    | 0.759710 | 0.768177 | 0.813562 | 10   
+NativeCPP                  | 0.760191 | 0.762660 | 0.764310 | 10   
+NativeFortran              | 0.609213 | 0.666736 | 0.944457 | 10   
+NativeCDirectMapping       | 0.590954 | 0.592908 | 0.595048 | 10   
+NativeCPPDirectMapping     | 0.590019 | 0.590717 | 0.591777 | 10   
+NativeFortranDirectMapping | 0.442119 | 0.505676 | 0.817071 | 10   
+C (stdio)                  | 3.491086 | 3.624031 | 3.811102 | 10   
+C (socket)                 | 5.133998 | 5.718838 | 6.264228 | 10   
+Python (stdio)             | 4.160345 | 4.606743 | 7.535541 | 10   
+Python (socket)            | 7.309614 | 7.521161 | 7.687363 | 10   
+Pypy (stdio)               | 4.137685 | 4.323154 | 4.523190 | 10   
+Pypy (socket)              | 7.225642 | 7.555687 | 7.847407 | 10   
+JMetal (Direct)            | 1.514307 | 1.621460 | 2.125424 | 10   
+JMetal (Plugin)            | 1.518611 | 1.552718 | 1.628613 | 10  
+
 ## v4.1
 
 ### Windows
