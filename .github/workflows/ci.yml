@@ -68,13 +68,10 @@ jobs:
         with:
           python-version: 'pypy3.10' 
       - uses: fortran-lang/setup-fortran@v1
-        if: false && runner.os == 'macOS'
+        if: runner.os == 'macOS'
         with:
           compiler: gcc
           version: 13
-      - if: runner.os == 'macOS'
-        run: |
-          alias gfortran="gfortran-13"
       - uses: actions/checkout@v4
         if: env.BRANCH != ''
         with:
